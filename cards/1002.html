@@ -34,8 +34,8 @@
         }
         
         .card {
-            width: 400px;
-            height: 640px;
+            width: 380px;
+            height: 620px;
             background: white;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
@@ -206,6 +206,11 @@
     </div>
 
 <!--Impedir zoom no iphone-->
-
+<script>
+	document.addEventListener('gesturestart', function(e) {
+		e.preventDefault();
+		document.body.style.zoom = 0.95;
+	});
+</script>
 </body>
 </html>
