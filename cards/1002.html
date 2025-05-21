@@ -18,7 +18,7 @@
         
         .card {
             width: 350px;
-            height: 550px;
+            height: 630px;
             background: white;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
@@ -76,13 +76,16 @@
             object-fit: cover;
         }
         
-        .card-body {
-            padding: 80px 30px 30px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            height: calc(100% - 80px - 60px);
-        }
+		.card-body {
+			padding: 70px 30px 30px;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			/* Remova a altura fixa */
+			height: auto;
+			/* Adicione um mínimo de altura se necessário */
+			min-height: 200px;
+		}
         
         h1 {
             margin: 0;
@@ -127,14 +130,17 @@
         }
         
 		.validity {
-			color: #78B343; /* Cor do texto verde */
+			color: #78B343;
 			padding: 10px;
 			border-radius: 10px;
 			font-weight: 500;
 			display: inline-block;
-			margin-top: 10px;
-			border: 2px solid #78B343; /* Borda verde */
-			background-color: transparent; /* Fundo transparente */
+			margin-top: auto; /* Empurra o elemento para baixo */
+			border: 2px solid #78B343;
+			background-color: transparent;
+			width: fit-content;
+			align-self: center; /* Centraliza horizontalmente */
+			margin-bottom: 15px; /* Espaço inferior */
 		}
         
         .pattern {
@@ -172,7 +178,6 @@
                     <div class="info-icon">📍</div>
                     <div class="info-text">Naturalidade: João Pessoa - PB</div>
                 </div>
-		
             </div>
             
             <div class="validity">Válido até: 22-Maio-2026</div>
