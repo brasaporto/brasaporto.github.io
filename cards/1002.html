@@ -204,12 +204,13 @@
             <div class="validity">Válido até: 22-Maio-2026</div>
         </div>
     </div>
-	
+
+<!--Impedir zoom no iphone-->
 <script>
-document.addEventListener('gesturestart', function(e) {
-    e.preventDefault();
-    document.body.style.zoom = 1.0;
-});
+	document.addEventListener('gesturestart', function(e) {
+		e.preventDefault();
+		document.body.style.zoom = 0.8;
+	});
 </script>	
 </body>
 </html>
