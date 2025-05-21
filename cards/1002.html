@@ -2,20 +2,25 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" 
-          content="width=device-width, 
-                   initial-scale=1.0, 
-                   maximum-scale=1.0, 
-                   minimum-scale=1.0, 
-                   user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>BRASA Card - Gustavo Bongiovi</title>
     <style>
 		html {
-            touch-action: manipulation;
-            -webkit-text-size-adjust: none;
-            -ms-text-size-adjust: none;
-            text-size-adjust: none;
-        }
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+			touch-action: none;
+			-webkit-touch-callout: none;
+			-webkit-text-size-adjust: 100%;
+			-ms-text-size-adjust: 100%;
+			text-size-adjust: 100%;
+		}
+
+		body {
+			zoom: 1;
+			max-zoom: 1;
+			min-zoom: 1;
+		}
 	
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -199,5 +204,12 @@
             <div class="validity">Válido até: 22-Maio-2026</div>
         </div>
     </div>
+	
+<script>
+document.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+    document.body.style.zoom = 1.0;
+});
+</script>	
 </body>
 </html>
