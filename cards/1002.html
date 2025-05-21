@@ -2,9 +2,21 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" 
+          content="width=device-width, 
+                   initial-scale=1.0, 
+                   maximum-scale=1.0, 
+                   minimum-scale=1.0, 
+                   user-scalable=no">
     <title>BRASA Card - Gustavo Bongiovi</title>
     <style>
+		html {
+            touch-action: manipulation;
+            -webkit-text-size-adjust: none;
+            -ms-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+	
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -13,12 +25,12 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 0px;
         }
         
         .card {
-            width: 350px;
-            height: 630px;
+            width: 400px;
+            height: 640px;
             background: white;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
@@ -27,7 +39,7 @@
         }
         
         .card-header {
-            height: 40%;
+            height: 35%;
             background: linear-gradient(135deg, #1488CA 0%, #78B343 100%);
             position: relative;
             display: flex;
@@ -172,11 +184,15 @@
             <div class="info">
                 <div class="info-item">
                     <div class="info-icon">📅</div>
-                    <div class="info-text">Data Nascimento: 14-Março-2000</div>
+                    <div class="info-text"><b>Data Nascimento:</b> 14-Março-2000</div>
                 </div>
                 <div class="info-item">
                     <div class="info-icon">📍</div>
-                    <div class="info-text">Naturalidade: João Pessoa - PB</div>
+                    <div class="info-text"><b>Naturalidade:</b> João Pessoa - PB</div>
+                </div>
+				<div class="info-item">
+                    <div class="info-icon">#️⃣</div>
+                    <div class="info-text"><b>BRASA Card</b> #GB10DOC02</div>
                 </div>
             </div>
             
