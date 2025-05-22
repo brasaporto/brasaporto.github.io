@@ -2,12 +2,11 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-	<meta name="viewport">
-	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=yes"-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=yes"
     <link rel="icon" type="image/png" href="icon.png"> <!-- Adicione esta linha -->
     <title>BRASA Card - Gustavo Bongiovi</title>
     <style>
-	<!--html {
+	html {
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			user-select: none;
@@ -16,12 +15,12 @@
 			-webkit-text-size-adjust: 100%;
 			-ms-text-size-adjust: 100%;
 			text-size-adjust: 100%;
-		}-->
+		}
 
 		body {
-			zoom: 1.75;
-			max-zoom: 1.75;
-			min-zoom: 0.75;
+			zoom: 1;
+			max-zoom: 1;
+			min-zoom: 1;
 		}
 	
         body {
@@ -207,13 +206,12 @@
         </div>
     </div>
 
-<!--Impedir zoom no iphone
+<!--Impedir zoom no iphone-->
 <script>
 	document.addEventListener('gesturestart', function(e) {
 		e.preventDefault();
 		document.body.style.zoom = 0.95;
 	});
 </script>
--->
 </body>
 </html>
