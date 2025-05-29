@@ -217,50 +217,50 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // URL do arquivo CSV - ajuste conforme necessário
-            const csvUrl = 'lista.csv';
-            // Função para converter CSV em HTML table
-            function csvToTable(csv) {
-                const lines = csv.split('\n');
-                let table = '<table>\n<thead>\n<tr>\n';
-                
-                // Cabeçalhos
-                const headers = lines[0].split(',');
-                headers.forEach(header => {
-                    table += `<th>${header.trim()}</th>\n`;
-                });
-                table += '</tr>\n</thead>\n<tbody>\n';
-                
-                // Linhas de dados
-                for (let i = 1; i < lines.length; i++) {
-                    if (lines[i].trim() === '') continue;
-                    
-                    const cells = lines[i].split(',');
-                    table += '<tr>\n';
-                    
-                    // Primeira célula (Nome)
-                    table += `<td>${cells[0].trim()}</td>\n`;
-                    
-                    // Segunda célula (Card) com formatação especial
-                    if (cells[1]) {
-                        table += `<td class="card-cell">${cells[1].trim()}</td>\n`;
-                    } else {
-                        table += '<td></td>\n';
-                    }
-                    
-                    table += '</tr>\n';
-                }
-                
-                table += '</tbody>\n</table>';
-                return table;
-            }
-            
-            // Exibir a tabela quando a página carregar
-            document.addEventListener('DOMContentLoaded', function() {
-                const tableContainer = document.getElementById('table-container');
-                tableContainer.innerHTML = csvToTable(csvData);
-            });
+    document.addEventListener('DOMContentLoaded', () => {
+      const csvUrl = 'lista.csv';
+
+      // Função para converter CSV em HTML table
+      function csvToTable(csv) {
+        const lines  = csv.trim().split('\n');
+        const headers = lines[0].split(',').map(h => h.trim());
+        let html = '<table>\n<thead>\n<tr>\n';
+
+        // Cabeçalhos
+        headers.forEach(header => {
+          html += `  <th>${header}</th>\n`;
+        });
+        html += '</tr>\n</thead>\n<tbody>\n';
+
+        // Linhas de dados
+        for (let i = 1; i < lines.length; i++) {
+          const cells = lines[i].split(',');
+          html += '<tr>\n';
+          html += `  <td>${cells[0]?.trim() ?? ''}</td>\n`;
+          html += cells[1]
+            ? `  <td class="card-cell">${cells[1].trim()}</td>\n`
+            : '  <td></td>\n';
+          html += '</tr>\n';
+        }
+
+        html += '</tbody>\n</table>';
+        return html;
+      }
+
+      // 1) Fetch do CSV  
+      fetch(csvUrl)
+        .then(response => {
+          if (!response.ok) throw new Error('Falha ao carregar CSV');
+          return response.text();
+        })
+        .then(csvText => {
+          const tableHTML = csvToTable(csvText);
+          document.getElementById('table-container').innerHTML = tableHTML;
+        })
+        .catch(err => {
+          document.getElementById('table-container').textContent = err.message;
+        });
+    });
     </script>
 </body>
 </html>
