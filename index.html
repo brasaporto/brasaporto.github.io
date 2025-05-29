@@ -11,6 +11,7 @@
             --azul-brasa: #0066B3;
             --branco: #FFFFFF;
             --cinza-claro: #F5F5F5;
+            --sombra: rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -24,6 +25,8 @@
             background-color: var(--cinza-claro);
             color: #333;
             line-height: 1.6;
+            background-image: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), 
+                              url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%232E7D32" opacity="0.05" x="0" y="0" width="100" height="100"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%230066B3" stroke-opacity="0.1" stroke-width="1"/></svg>');
         }
         
         header {
@@ -32,24 +35,54 @@
             text-align: center;
             padding: 3rem 1rem;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
+            pointer-events: none;
         }
         
         .logo-container {
-            max-width: 150px;
+            width: 120px;
+            height: 120px;
             margin: 0 auto 1rem;
-            background-color: white;
+            background-color: var(--branco);
             border-radius: 50%;
             padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
         }
         
-        .logo-container img {
-            width: 100%;
+        .logo {
+            font-weight: 800;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--verde-brasa), var(--azul-brasa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            line-height: 1;
         }
         
         h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
         }
         
         .container {
@@ -61,9 +94,17 @@
         section {
             background: var(--branco);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px var(--sombra);
             padding: 2rem;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
         h2 {
@@ -71,26 +112,54 @@
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--amarelo-brasa);
+            display: inline-block;
         }
         
         .card-info {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 30px;
             margin-top: 1.5rem;
+            background: rgba(46, 125, 50, 0.05);
+            padding: 20px;
+            border-radius: 8px;
         }
         
         .card-sample {
-            flex: 0 0 180px;
-            height: 110px;
+            flex: 0 0 200px;
+            height: 125px;
             background: linear-gradient(135deg, var(--azul-brasa), var(--verde-brasa));
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--branco);
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-size: 1.1rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-sample::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: rotate(30deg);
+        }
+        
+        .card-sample::after {
+            content: "BRASA CARD";
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.8rem;
+            opacity: 0.8;
         }
         
         table {
@@ -98,13 +167,16 @@
             border-collapse: collapse;
             margin-top: 1rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-radius: 8px;
+            overflow: hidden;
         }
         
         th {
-            background-color: var(--verde-brasa);
+            background: linear-gradient(to right, var(--verde-brasa), var(--azul-brasa));
             color: var(--branco);
-            padding: 12px 15px;
+            padding: 15px 20px;
             text-align: left;
+            font-weight: 600;
         }
         
         tr:nth-child(even) {
@@ -112,8 +184,12 @@
         }
         
         td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #ddd;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background-color: rgba(46, 125, 50, 0.08);
         }
         
         a {
@@ -121,36 +197,113 @@
             text-decoration: none;
             transition: color 0.3s;
             font-weight: 500;
+            position: relative;
         }
         
         a:hover {
             color: var(--verde-brasa);
-            text-decoration: underline;
+        }
+        
+        a::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--amarelo-brasa);
+            transition: width 0.3s;
+        }
+        
+        a:hover::after {
+            width: 100%;
         }
         
         .btn {
             display: inline-block;
             background: var(--amarelo-brasa);
             color: #333;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 30px;
             font-weight: bold;
             margin-top: 10px;
             transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
         
         .btn:hover {
             background: #ffc400;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
             text-decoration: none;
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .card-link {
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(0, 102, 179, 0.1);
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .card-link:hover {
+            background: rgba(0, 102, 179, 0.2);
         }
         
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem;
             background: linear-gradient(135deg, var(--azul-brasa), var(--verde-brasa));
             color: var(--branco);
-            margin-top: 2rem;
+            margin-top: 3rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--amarelo-brasa);
+        }
+        
+        .social-icons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(255,214,0,0.2), rgba(255,214,0,0));
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
         }
         
         @media (max-width: 768px) {
@@ -162,14 +315,27 @@
             h1 {
                 font-size: 2rem;
             }
+            
+            .logo-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .card-sample {
+                width: 100%;
+                max-width: 250px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <!-- Adicione sua logo aqui -->
-            <div style="font-size: 3rem; color: var(--verde-brasa);">BR</div>
+            <div class="logo">BR</div>
         </div>
         <h1>BRASA PORTO</h1>
         <p>Associação de Estudantes Brasileiros no Porto</p>
@@ -179,6 +345,7 @@
         <section id="about">
             <h2>Sobre a BRASA Porto</h2>
             <p>Somos a Associação de Estudantes Brasileiros na cidade do Porto em Portugal. Nosso objetivo é promover a integração e o desenvolvimento acadêmico, cultural e social dos membros e da comunidade, oferecendo suporte e oportunidades únicas.</p>
+            <p>Através de eventos, parcerias e iniciativas, conectamos brasileiros que escolheram o Porto para seus estudos, criando uma rede de apoio e compartilhamento de experiências.</p>
         </section>
 
         <section id="brasacard">
@@ -187,16 +354,44 @@
             <p>Mais do que um simples cartão, trata-se de um passaporte para uma rede de oportunidades, descontos e experiências pensadas para apoiar e integrar os estudantes brasileiros que escolhem a cidade do Porto como seu segundo lar.</p>
             
             <div class="card-info">
-                <div class="card-sample">BRASA CARD</div>
+                <div class="card-sample">MEMBRO</div>
                 <div>
                     <p>Para acessar seu cartão digital, procure seu nome na tabela abaixo e clique no link correspondente.</p>
-                    <a href="#cards" class="btn">Ver Cartões</a>
+                    <a href="#cards" class="btn">Ver Cartões Disponíveis</a>
                 </div>
             </div>
         </section>
 
+                <section id="benefits">
+            <h2>Vantagens do BRASA Card</h2>
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
+                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
+                    <div>Descontos exclusivos em restaurantes, bares e estabelecimentos parceiros na cidade do Porto</div>
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
+                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
+                    <div>Acesso prioritário a eventos da BRASA Porto e instituições parceiras</div>
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
+                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
+                    <div>Participação em grupos de estudo e redes de apoio acadêmico</div>
+                </li>
+                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
+                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
+                    <div>Descontos em cursos de língua portuguesa e eventos culturais</div>
+                </li>
+                <li style="padding: 10px 0; display: flex; align-items: flex-start;">
+                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
+                    <div>Acesso à rede de contatos profissionais da comunidade brasileira no Porto</div>
+                </li>
+            </ul>
+        </section>
+
         <section id="cards">
             <h2>Cartões dos Membros</h2>
+            <p>Selecione seu nome na lista abaixo para acessar seu cartão digital:</p>
+            
             <table id="cards-table">
                 <thead>
                     <tr>
@@ -205,62 +400,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Os cartões serão carregados por JavaScript -->
+                    <tr>
+                        <td>Gustavo Bongiovi</td>
+                        <td><a href="GB10DOC02.html" class="card-link">GB10DOC02</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ana Silva</td>
+                        <td><a href="AS20DOC03.html" class="card-link">AS20DOC03</a></td>
+                    </tr>
+                    <tr>
+                        <td>Carlos Oliveira</td>
+                        <td><a href="CO15DOC01.html" class="card-link">CO15DOC01</a></td>
+                    </tr>
+                    <tr>
+                        <td>Mariana Costa</td>
+                        <td><a href="MC25DOC04.html" class="card-link">MC25DOC04</a></td>
+                    </tr>
+                    <tr>
+                        <td>Pedro Santos</td>
+                        <td><a href="PS30DOC05.html" class="card-link">PS30DOC05</a></td>
+                    </tr>
+                    <tr>
+                        <td>Juliana Pereira</td>
+                        <td><a href="JP12DOC06.html" class="card-link">JP12DOC06</a></td>
+                    </tr>
                 </tbody>
             </table>
+            
+            <div style="margin-top: 20px; background: rgba(255, 214, 0, 0.1); padding: 15px; border-radius: 8px;">
+                <p><strong>Nota:</strong> Se seu nome não consta na lista, entre em contato conosco através do e-mail <span class="highlight">contato@brasaporto.pt</span> para regularizar sua situação.</p>
+            </div>
         </section>
+        
     </div>
 
     <footer>
         <p>&copy; 2025 BRASA Porto - Associação de Estudantes Brasileiros no Porto</p>
-        <p>contato@brasaporto.pt | +351 123 456 789</p>
+        <p>contato@brasaporto.pt | +351 912 345 678</p>
+        <p>Rua do Brasil, 123, Porto, Portugal</p>
+        
+        <div class="social-icons">
+            <a href="#" class="social-icon">f</a>
+            <a href="#" class="social-icon">in</a>
+            <a href="#" class="social-icon">ig</a>
+            <a href="#" class="social-icon">✉</a>
+        </div>
     </footer>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const csvUrl = 'lista.csv';
-
-      // Função para converter CSV em HTML table
-      function csvToTable(csv) {
-        const lines  = csv.trim().split('\n');
-        const headers = lines[0].split(',').map(h => h.trim());
-        let html = '<table>\n<thead>\n<tr>\n';
-
-        // Cabeçalhos
-        headers.forEach(header => {
-          html += `  <th>${header}</th>\n`;
-        });
-        html += '</tr>\n</thead>\n<tbody>\n';
-
-        // Linhas de dados
-        for (let i = 1; i < lines.length; i++) {
-          const cells = lines[i].split(',');
-          html += '<tr>\n';
-          html += `  <td>${cells[0]?.trim() ?? ''}</td>\n`;
-          html += cells[1]
-            ? `  <td class="card-cell">${cells[1].trim()}</td>\n`
-            : '  <td></td>\n';
-          html += '</tr>\n';
-        }
-
-        html += '</tbody>\n</table>';
-        return html;
-      }
-
-      // 1) Fetch do CSV  
-      fetch(csvUrl)
-        .then(response => {
-          if (!response.ok) throw new Error('Falha ao carregar CSV');
-          return response.text();
-        })
-        .then(csvText => {
-          const tableHTML = csvToTable(csvText);
-          document.getElementById('table-container').innerHTML = tableHTML;
-        })
-        .catch(err => {
-          document.getElementById('table-container').textContent = err.message;
-        });
-    });
-    </script>
 </body>
 </html>
