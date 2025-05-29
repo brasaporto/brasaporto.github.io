@@ -53,9 +53,9 @@
         }
         
         .logo-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 1rem;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
             background-color: var(--branco);
             border-radius: 50%;
             padding: 15px;
@@ -65,16 +65,17 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             position: relative;
             z-index: 2;
+            border: 3px solid var(--amarelo-brasa);
         }
         
-        .logo {
-            font-weight: 800;
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--verde-brasa), var(--azul-brasa));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-            line-height: 1;
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-container:hover img {
+            transform: scale(1.05);
         }
         
         h1 {
@@ -291,7 +292,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s;
+            transition: all 0.3s;
         }
         
         .social-icon:hover {
@@ -317,12 +318,8 @@
             }
             
             .logo-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
+                width: 120px;
+                height: 120px;
             }
             
             .card-sample {
@@ -330,12 +327,73 @@
                 max-width: 250px;
             }
         }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card-item {
+            background: linear-gradient(135deg, var(--azul-brasa), var(--verde-brasa));
+            border-radius: 8px;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .card-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .card-desc {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .benefits-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .benefits-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .benefits-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .benefit-icon {
+            background: var(--amarelo-brasa);
+            color: #333;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <div class="logo">BR</div>
+            <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=1974&auto=format&fit=crop" alt="BRASA Porto" class="logo">
         </div>
         <h1>BRASA PORTO</h1>
         <p>Associação de Estudantes Brasileiros no Porto</p>
@@ -362,38 +420,9 @@
             </div>
         </section>
 
-                <section id="benefits">
-            <h2>Vantagens do BRASA Card</h2>
-            <ul style="list-style-type: none; padding-left: 0;">
-                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
-                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
-                    <div>Descontos exclusivos em restaurantes, bares e estabelecimentos parceiros na cidade do Porto</div>
-                </li>
-                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
-                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
-                    <div>Acesso prioritário a eventos da BRASA Porto e instituições parceiras</div>
-                </li>
-                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
-                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
-                    <div>Participação em grupos de estudo e redes de apoio acadêmico</div>
-                </li>
-                <li style="padding: 10px 0; border-bottom: 1px solid #eee; display: flex; align-items: flex-start;">
-                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
-                    <div>Descontos em cursos de língua portuguesa e eventos culturais</div>
-                </li>
-                <li style="padding: 10px 0; display: flex; align-items: flex-start;">
-                    <span style="background: var(--amarelo-brasa); color: #333; width: 25px; height: 25px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0;">✓</span>
-                    <div>Acesso à rede de contatos profissionais da comunidade brasileira no Porto</div>
-                </li>
-            </ul>
-        </section>
-
         <section id="cards">
             <h2>Cartões dos Membros</h2>
-            
-            <div style="margin-top: 20px; background: rgba(255, 214, 0, 0.1); padding: 15px; border-radius: 8px;">
-            <p><strong>Nota:</strong> Se seu nome não consta na lista e a validade do seu cartão ainda não expirou, entre em contato conosco através do e-mail <span class="highlight">contato@brasaporto.pt</span> para regularizar sua situação.</p>
-            </div>
+            <p>Selecione seu nome na lista abaixo para acessar seu cartão digital:</p>
             
             <table id="cards-table">
                 <thead>
@@ -430,8 +459,58 @@
                 </tbody>
             </table>
             
+            <div style="margin-top: 20px; background: rgba(255, 214, 0, 0.1); padding: 15px; border-radius: 8px;">
+                <p><strong>Nota:</strong> Se seu nome não consta na lista, entre em contato conosco através do e-mail <span class="highlight">contato@brasaporto.pt</span> para regularizar sua situação.</p>
+            </div>
         </section>
         
+        <section id="benefits">
+            <h2>Vantagens do BRASA Card</h2>
+            <ul class="benefits-list">
+                <li>
+                    <span class="benefit-icon">✓</span>
+                    <div>Descontos exclusivos em restaurantes, bares e estabelecimentos parceiros na cidade do Porto</div>
+                </li>
+                <li>
+                    <span class="benefit-icon">✓</span>
+                    <div>Acesso prioritário a eventos da BRASA Porto e instituições parceiras</div>
+                </li>
+                <li>
+                    <span class="benefit-icon">✓</span>
+                    <div>Participação em grupos de estudo e redes de apoio acadêmico</div>
+                </li>
+                <li>
+                    <span class="benefit-icon">✓</span>
+                    <div>Descontos em cursos de língua portuguesa e eventos culturais</div>
+                </li>
+                <li>
+                    <span class="benefit-icon">✓</span>
+                    <div>Acesso à rede de contatos profissionais da comunidade brasileira no Porto</div>
+                </li>
+            </ul>
+        </section>
+        
+        <section id="partners">
+            <h2>Parceiros</h2>
+            <div class="card-grid">
+                <div class="card-item">
+                    <div class="card-title">Restaurantes</div>
+                    <div class="card-desc">Descontos de 10-20% em diversos estabelecimentos</div>
+                </div>
+                <div class="card-item">
+                    <div class="card-title">Livrarias</div>
+                    <div class="card-desc">15% de desconto em livros acadêmicos</div>
+                </div>
+                <div class="card-item">
+                    <div class="card-title">Transporte</div>
+                    <div class="card-desc">Tarifas especiais para estudantes</div>
+                </div>
+                <div class="card-item">
+                    <div class="card-title">Cultura</div>
+                    <div class="card-desc">Entradas gratuitas em museus e eventos</div>
+                </div>
+            </div>
+        </section>
     </div>
 
     <footer>
