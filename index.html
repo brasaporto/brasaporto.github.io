@@ -220,50 +220,47 @@
         document.addEventListener('DOMContentLoaded', function() {
             // URL do arquivo CSV - ajuste conforme necessário
             const csvUrl = 'lista.csv';
-            const tableBody = document.querySelector('#cards-table tbody');
-            
-            fetch(csvUrl)
-                .then(response => response.text())
-                .then(data => {
-                    const rows = data.split('\n');
-                    
-                    // Processar cada linha do CSV
-                    rows.forEach(row => {
-                        if (row.trim() === '') return;
-                        
-                        const [name, cardId] = row.split('|').map(item => item.trim());
-                        
-                        if (name && cardId) {
-                            const tr = document.createElement('tr');
-                            
-                            const tdName = document.createElement('td');
-                            tdName.textContent = name;
-                            
-                            const tdLink = document.createElement('td');
-                            const link = document.createElement('a');
-                            link.href = `https://brasaporto.github.io/cards/card.html?card=${cardId}`;
-                            link.textContent = 'Ver Cartão';
-                            link.target = '_blank';
-                            
-                            tdLink.appendChild(link);
-                            tr.appendChild(tdName);
-                            tr.appendChild(tdLink);
-                            
-                            tableBody.appendChild(tr);
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar o arquivo CSV:', error);
-                    const tr = document.createElement('tr');
-                    const td = document.createElement('td');
-                    td.colSpan = 2;
-                    td.textContent = 'Erro ao carregar os cartões. Por favor, tente novamente mais tarde.';
-                    td.style.color = 'red';
-                    tr.appendChild(td);
-                    tableBody.appendChild(tr);
+            // Função para converter CSV em HTML table
+            function csvToTable(csv) {
+                const lines = csv.split('\n');
+                let table = '<table>\n<thead>\n<tr>\n';
+                
+                // Cabeçalhos
+                const headers = lines[0].split(',');
+                headers.forEach(header => {
+                    table += `<th>${header.trim()}</th>\n`;
                 });
-        });
+                table += '</tr>\n</thead>\n<tbody>\n';
+                
+                // Linhas de dados
+                for (let i = 1; i < lines.length; i++) {
+                    if (lines[i].trim() === '') continue;
+                    
+                    const cells = lines[i].split(',');
+                    table += '<tr>\n';
+                    
+                    // Primeira célula (Nome)
+                    table += `<td>${cells[0].trim()}</td>\n`;
+                    
+                    // Segunda célula (Card) com formatação especial
+                    if (cells[1]) {
+                        table += `<td class="card-cell">${cells[1].trim()}</td>\n`;
+                    } else {
+                        table += '<td></td>\n';
+                    }
+                    
+                    table += '</tr>\n';
+                }
+                
+                table += '</tbody>\n</table>';
+                return table;
+            }
+            
+            // Exibir a tabela quando a página carregar
+            document.addEventListener('DOMContentLoaded', function() {
+                const tableContainer = document.getElementById('table-container');
+                tableContainer.innerHTML = csvToTable(csvData);
+            });
     </script>
 </body>
 </html>
