@@ -6,7 +6,16 @@
     <link rel="icon" type="image/png" href="icon.png">
     <title>BRASA Card - Gustavo Bongiovi</title>
     <style>
-	html {
+        :root{
+            --card-width: 370px;
+            --card-height: 580px;
+            --accent-1: #1488CA;
+            --accent-2: #78B343;
+            --bg-start: #f5f7fa;
+            --bg-end: #c3cfe2;
+        }
+
+		html {
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			user-select: none;
@@ -22,10 +31,10 @@
 			max-zoom: 1;
 			min-zoom: 1;
 		}
-	
+    
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,20 +44,22 @@
         }
         
         .card {
-            width: 370px;
-            height: 580px;
+            width: var(--card-width);
+            height: var(--card-height);
             background: white;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             position: relative;
-	    margin-left: 1em;
+            margin-left: 1em;
             margin-right: 1em;
+            display: flex;
+            flex-direction: column;
         }
         
         .card-header {
             height: 35%;
-            background: linear-gradient(135deg, #1488CA 0%, #78B343 100%);
+            background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
             position: relative;
             display: flex;
             justify-content: center;
@@ -115,7 +126,7 @@
         }
         
         .title {
-            color: #78B343;
+            color: var(--accent-2);
             font-weight: 500;
             margin: 10px 0;
             font-size: 18px;
@@ -136,33 +147,45 @@
         .info-icon {
             width: 30px;
             height: 30px;
-            background-color: ;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-right: 15px;
             color: white;
+            font-size: 14px;
         }
         
         .info-text {
             color: #555;
         }
         
+		.validity-wrap{
+			display:flex;
+			flex-direction:column;
+			align-items:center;
+			margin-top: auto; /* pushes to bottom of card body */
+			margin-bottom: 15px;
+		}
+
 		.validity {
-			color: #78B343;
-			padding: 10px;
+			color: var(--accent-2);
+			padding: 10px 14px;
 			border-radius: 10px;
 			font-weight: 500;
 			display: inline-block;
-			margin-top: auto; /* Empurra o elemento para baixo */
-			border: 2px solid #78B343;
+			border: 2px solid var(--accent-2);
 			background-color: transparent;
 			width: fit-content;
-			align-self: center; /* Centraliza horizontalmente */
-			margin-bottom: 15px; /* Espaço inferior */
 		}
-        
+
+		.card-number{
+			font-size: 12px; /* smaller size as requested */
+			color: #333;
+			opacity: 0.8;
+			margin-top:8px;
+		}
+
         .pattern {
             position: absolute;
             width: 100%;
@@ -171,18 +194,51 @@
                 radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
                 radial-gradient(circle at 30% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
         }
-    </style>
+
+        /* Responsive tweaks */
+        @media (max-width: 420px){
+            :root{ --card-width: 320px; --card-height: 540px; }
+            .photo{ width: 100px; height:100px; bottom: -50px; }
+            h1{ font-size:20px; }
+        }
+
+    
+        /* Modal (QR) */
+        .modal-overlay{
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-overlay.show{ display:flex; }
+        .modal{
+            background:white;
+            border-radius:12px;
+            padding:16px;
+            max-width:90%;
+            box-shadow:0 10px 30px rgba(0,0,0,0.3);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+        }
+        .modal img{ max-width:260px; width:100%; height:auto; display:block; }
+        .close-btn{ margin-top:12px; background:var(--accent-2); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+        .photo[role="button"]{ cursor:pointer; }
+        .photo[role="button"]:focus{ outline: 3px solid rgba(120,179,67,0.4); }
+</style>
 </head>
 <body>
-    <div class="card">
+    <div class="card" role="region" aria-label="BRASA Card de Gustavo Bongiovi">
         <div class="card-header">
             <div class="header-content">
                 <img src="logo.png" alt="BRASA Porto" class="logo">
-                <div class="photo">
-                    <!-- Substitua pelo caminho da sua foto -->
-                    <img src="GB10DOC02.jpg" alt="Foto">
+                <div class="photo" role="button" aria-label="Abrir QR code" tabindex="0">
+                    <img src="GB10DOC02.jpg" alt="Foto de Gustavo Bongiovi">
                 </div>
-                <div class="pattern"></div>
+                <div class="pattern" aria-hidden="true"></div>
             </div>
         </div>
         <div class="card-body">
@@ -198,22 +254,72 @@
 			        <div class="info-icon">🌍</div>
 			        <div class="info-text"><b>Naturalidade:</b> Paraíba</div>
 			    </div>
-			    <div class="info-item">
-			        <div class="info-icon">💳</div>
-			        <div class="info-text"><b>BRASA Card:</b> #GB10DOC02</div>
-			    </div>
+			    <!-- BRASA Card line removed as requested -->
             </div>
             
-            <div class="validity">Válido até: 22-05-2026</div>
+            <div class="validity-wrap">
+                <div class="validity" aria-label="Validade">Válido até: 22-05-2026</div>
+                <!-- Relocated card number, smaller & centered beneath the validity -->
+                <div class="card-number">#GB10DOC02</div>
+            </div>
         </div>
     </div>
 
 <!--Impedir zoom no iphone-->
+
+<!-- QR Modal -->
+<div class="modal-overlay" id="qrModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="QR code">
+    <div class="modal">
+        <img src="qr_code.png" alt="QR code">
+        <button class="close-btn" type="button" id="closeQrBtn">Fechar</button>
+    </div>
+</div>
+
 <script>
-	document.addEventListener('gesturestart', function(e) {
-		e.preventDefault();
-		document.body.style.zoom = 0.95;
-	});
+    // Impedir gesto de zoom no iPhone
+    document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+        document.body.style.zoom = 0.95;
+    });
+
+    // Modal (QR) logic
+    (function(){
+        var photo = document.querySelector('.photo[role="button"]');
+        var modal = document.getElementById('qrModal');
+        var closeBtn = document.getElementById('closeQrBtn');
+
+        if(!photo || !modal) return;
+
+        function openModal(){
+            modal.classList.add('show');
+            modal.setAttribute('aria-hidden','false');
+            // move focus to close button for accessibility
+            closeBtn.focus();
+        }
+        function closeModal(){
+            modal.classList.remove('show');
+            modal.setAttribute('aria-hidden','true');
+            // return focus to photo
+            photo.focus();
+        }
+
+        photo.addEventListener('click', openModal);
+        photo.addEventListener('keydown', function(e){
+            if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openModal(); }
+        });
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function(e){
+            if(e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e){
+            if(e.key === 'Escape' && modal.classList.contains('show')){
+                closeModal();
+            }
+        });
+    })();
 </script>
 </body>
 </html>
